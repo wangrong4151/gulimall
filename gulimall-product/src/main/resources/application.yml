@@ -19,3 +19,7 @@ mybatis-plus:
       id-type: auto
 server:
   port: 10000
+logging:
+  level:
+    com.atguigu.gulimall.product: debug
+na

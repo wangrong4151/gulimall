@@ -6,6 +6,7 @@
  * 版权所有，侵权必究！
  */
 
+/*
 package io.renren.config;
 
 import org.springframework.context.annotation.Configuration;
@@ -23,4 +24,4 @@ public class CorsConfig implements WebMvcConfigurer {
             .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
             .maxAge(3600);
     }
-}
+}*/
