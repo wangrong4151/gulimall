@@ -1,5 +1,8 @@
 package com.atguigu.gulimall.product.service;
 
+import com.atguigu.gulimall.product.entity.BrandEntity;
+import com.atguigu.gulimall.product.vo.BrandsVo;
+import com.atguigu.gulimall.product.vo.CatelogVo;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.atguigu.common.utils.PageUtils;
@@ -20,5 +23,9 @@ public interface CategoryBrandRelationService extends IService<CategoryBrandRela
     PageUtils queryPage(Map<String, Object> params);
 
 
+    List<BrandsVo> brandsList(Map<String, Object> params);
+
+    List<CatelogVo> withCatelog(Map<String, Object> params);
+    List<BrandEntity> getBrandsByCatId(Long catId);
 }
 

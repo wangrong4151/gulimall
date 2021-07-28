@@ -42,12 +42,22 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         List<CategoryEntity> menu = new ArrayList<>();
         for (CategoryEntity entity : entities) {
             if (entity.getParentCid()==0){
-                entity.setChildrens(getCategory(entity,entities));
+                entity.setChildren(getCategory(entity,entities));
                 menu.add(entity);
             }
         }
 
         return menu;
+    }
+    private List<CategoryEntity> getCategory(CategoryEntity root, List<CategoryEntity> all) {
+        List<CategoryEntity> list = new ArrayList<>();
+        for (CategoryEntity categoryEntity : all) {
+            if(categoryEntity.getParentCid().equals(root.getCatId())){
+                categoryEntity.setChildren(getCategory(categoryEntity,all));
+                list.add(categoryEntity);
+            }
+        }
+        return list;
     }
 
     @Override
@@ -86,15 +96,6 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         return paths;
     }
 
-    private List<CategoryEntity> getCategory(CategoryEntity root, List<CategoryEntity> all) {
-        List<CategoryEntity> list = new ArrayList<>();
-        for (CategoryEntity categoryEntity : all) {
-            if(categoryEntity.getCatId().equals(root.getParentCid())){
-                categoryEntity.setChildrens(getCategory(categoryEntity,all));
-                list.add(categoryEntity);
-            }
-        }
-        return list;
-    }
+
 
 }

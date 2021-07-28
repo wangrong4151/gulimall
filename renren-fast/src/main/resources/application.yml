@@ -74,3 +74,13 @@ renren:
     # token有效时长，7天，单位秒
     expire: 604800
     header: token
+
+
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848 # nacos
+  application:
+    name: renren-fast  # 意思是把renren-fast项目也注册到nacos中(后面不再强调了)，这样网关才能转发给
+
+

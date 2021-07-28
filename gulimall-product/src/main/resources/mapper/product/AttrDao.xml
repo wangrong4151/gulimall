@@ -16,5 +16,11 @@
         <result property="showDesc" column="show_desc"/>
     </resultMap>
 
+    <select id="selectByCatelogId" resultType="com.atguigu.gulimall.product.entity.AttrEntity">
+
+        SELECT * FROM pms_attr WHERE catelog_id = #{catelogId}
+
+    </select>
+
 
 </mapper>

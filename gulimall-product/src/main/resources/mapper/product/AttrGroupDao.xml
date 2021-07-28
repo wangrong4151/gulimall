@@ -13,5 +13,10 @@
         <result property="catelogId" column="catelog_id"/>
     </resultMap>
 
+    <select id="selectByCatelogId" resultType="com.atguigu.gulimall.product.entity.AttrGroupEntity">
+
+        SELECT * FROM pms_attr_group WHERE catelog_id = #{catelogId}
+
+    </select>
 
 </mapper>
