@@ -28,5 +28,7 @@ public interface AttrService extends IService<AttrEntity> {
     AttrInfoVo getInfoById(Long attrId);
 
     PageUtils attrWithRelation(Map<String, Object> params, Long catelogId);
+
+    List<Long> selectSearchAttrs(List<Long> attrIds);
 }
 

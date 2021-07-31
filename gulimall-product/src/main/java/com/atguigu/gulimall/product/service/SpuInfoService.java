@@ -19,5 +19,7 @@ public interface SpuInfoService extends IService<SpuInfoEntity> {
     PageUtils queryPage(Map<String, Object> params);
 
     void saveProduct(SpuSaveVo spuSaveVo);
+
+    void up(Long spuId);
 }
 

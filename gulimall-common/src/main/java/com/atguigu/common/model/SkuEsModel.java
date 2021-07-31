@@ -20,7 +20,7 @@ public class SkuEsModel {
     private String brandName;
     private String brandImg;
     private String catalogName;
-    private List<Attr> attrs;
+    private List<Attrs> attrs;
 
 
 
