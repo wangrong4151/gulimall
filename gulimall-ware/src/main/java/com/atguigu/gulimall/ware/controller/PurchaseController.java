@@ -26,7 +26,7 @@ import com.atguigu.common.utils.R;
  * @date 2021-07-23 17:20:08
  */
 @RestController
-@RequestMapping("ware/purchase")
+@RequestMapping("mapper/ware/purchase")
 public class PurchaseController {
     @Autowired
     private PurchaseService purchaseService;

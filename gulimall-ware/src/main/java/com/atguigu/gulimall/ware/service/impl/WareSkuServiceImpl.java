@@ -1,6 +1,8 @@
 package com.atguigu.gulimall.ware.service.impl;
 
 import com.atguigu.common.to.SkuHasStockVo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,6 +23,8 @@ import com.atguigu.gulimall.ware.service.WareSkuService;
 @Service("wareSkuService")
 public class WareSkuServiceImpl extends ServiceImpl<WareSkuDao, WareSkuEntity> implements WareSkuService {
 
+    @Autowired
+    private WareSkuDao wareSkuDao;
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         IPage<WareSkuEntity> page = this.page(
@@ -34,7 +38,7 @@ public class WareSkuServiceImpl extends ServiceImpl<WareSkuDao, WareSkuEntity> i
     @Override
     public List<SkuHasStockVo> getSkuHasStock(List<Long> skuIds) {
         List<SkuHasStockVo> skuHasStockVos = skuIds.stream().map(item -> {
-            Long count = this.baseMapper.getSkuStock(item);
+            Long count = wareSkuDao.getSkuStock(item);
             SkuHasStockVo skuHasStockVo = new SkuHasStockVo();
             skuHasStockVo.setSkuId(item);
             skuHasStockVo.setHasStock(count == null?false:count > 0);

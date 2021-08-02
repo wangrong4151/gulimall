@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 @FeignClient("gulimall-ware")
 public interface WareFeginService {
-    @PostMapping(value = "/ware/waresku/hasStock")
+    @PostMapping(value = "/ware/sku/hasStock")
     R getSkuHasStock(@RequestBody List<Long> skuIds);
 }

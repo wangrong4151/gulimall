@@ -3,6 +3,8 @@ package com.atguigu.gulimall.product.dao;
 import com.atguigu.gulimall.product.entity.AttrEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -18,5 +20,5 @@ public interface AttrDao extends BaseMapper<AttrEntity> {
 
     AttrEntity selectByCatelogId(Long catelogId);
 
-    List<Long> selectSearchAttrIds(List<Long> attrIds);
+    List<Long> selectSearchAttrIds(@Param("attrIds") List<Long> attrIds);
 }
