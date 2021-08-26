@@ -71,6 +71,17 @@ public class MemberServiceImpl extends ServiceImpl<MemberDao, MemberEntity> impl
 
     @Override
     public MemberEntity login(MemberUserLoginVo loginVo) {
+        String loginacct = loginVo.getLoginacct();
+        String password = loginVo.getPassword();
+        MemberEntity memberEntity = this.baseMapper.selectOne(new QueryWrapper<MemberEntity>().eq("username", loginacct).eq("mobile", loginacct));
+        String password1 = memberEntity.getPassword();
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        boolean matches = bCryptPasswordEncoder.matches(password, password1);
+        if(matches){
+            return memberEntity;
+        }
+
+        return null;
 
     }
 
