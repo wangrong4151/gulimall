@@ -3,19 +3,20 @@ package com.atguigu.gulimall.member.controller;
 import java.util.Arrays;
 import java.util.Map;
 
+import com.atguigu.common.exception.BizCodeEnum;
+import com.atguigu.gulimall.member.exception.PhoneException;
+import com.atguigu.gulimall.member.exception.UsernameException;
+import com.atguigu.gulimall.member.vo.MemberUserLoginVo;
+import com.atguigu.gulimall.member.vo.MemberUserRegisterVo;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.atguigu.gulimall.member.entity.MemberEntity;
 import com.atguigu.gulimall.member.service.MemberService;
 import com.atguigu.common.utils.PageUtils;
 import com.atguigu.common.utils.R;
-
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 /**
@@ -85,6 +86,26 @@ public class MemberController {
 		memberService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
+    }
+    @PostMapping(value = "/register")
+    public R register(@RequestBody MemberUserRegisterVo vo) {
+        try {
+            memberService.register(vo);
+        } catch (PhoneException e) {
+            return R.error(BizCodeEnum.PHONE_EXIST_EXCEPTION.getCode(),BizCodeEnum.PHONE_EXIST_EXCEPTION.getMessage());
+        } catch (UsernameException e) {
+            return R.error(BizCodeEnum.USER_EXIST_EXCEPTION.getCode(),BizCodeEnum.USER_EXIST_EXCEPTION.getMessage());
+        }
+        return R.ok();
+    }
+    @RequestMapping("/login") // member
+    public R login(@RequestBody MemberUserLoginVo loginVo) {
+        MemberEntity entity=memberService.login(loginVo);
+        if (entity!=null){
+            return R.ok();
+        }else {
+            return R.error(BizCodeEnum.LOGINACCT_PASSWORD_EXCEPTION.getCode(), BizCodeEnum.LOGINACCT_PASSWORD_EXCEPTION.getMsg());
+        }
     }
 
 }
