@@ -101,10 +101,10 @@ public class MemberController {
     @RequestMapping("/login") // member
     public R login(@RequestBody MemberUserLoginVo loginVo) {
         MemberEntity entity=memberService.login(loginVo);
-        if (entity!=null){
-            return R.ok();
-        }else {
-            return R.error(BizCodeEnum.LOGINACCT_PASSWORD_EXCEPTION.getCode(), BizCodeEnum.LOGINACCT_PASSWORD_EXCEPTION.getMsg());
+        if (entity != null) {
+            return R.ok().setData(entity);
+        } else {
+            return R.error(BizCodeEnum.LOGINACCT_PASSWORD_EXCEPTION.getCode(), BizCodeEnum.LOGINACCT_PASSWORD_EXCEPTION.getMessage());
         }
     }
 

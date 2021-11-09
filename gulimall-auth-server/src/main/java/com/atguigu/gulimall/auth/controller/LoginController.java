@@ -9,12 +9,14 @@ import com.atguigu.gulimall.auth.Vo.UserLoginVo;
 import com.atguigu.gulimall.auth.Vo.UserRegisterVo;
 import com.atguigu.gulimall.auth.feign.MemberFeignService;
 import com.atguigu.gulimall.auth.feign.ThirdPartFeignService;
+import com.atguigu.gulimall.auth.utli.SmsCodeUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.jetty.util.log.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
@@ -29,10 +31,10 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 @Slf4j
-@RestController
+@Controller
 public class LoginController {
-    @Autowired
-    private ThirdPartFeignService thirdPartFeignService;
+    /*@Autowired
+    private ThirdPartFeignService thirdPartFeignService;*/
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
@@ -41,6 +43,7 @@ public class LoginController {
     private MemberFeignService memberFeignService;
 
     @GetMapping(value = "/sms/sendCode")
+    @ResponseBody
     public R sendCode(@RequestParam("phone") String phone) {
 
         //1、接口防刷
@@ -57,9 +60,10 @@ public class LoginController {
         //2、验证码的再次效验 redis.存key-phone,value-code
 //        String code = UUID.randomUUID().toString().substring(0, 5);
 //        String redisValue = code+"_"+System.currentTimeMillis();
-        Double smsCode = Math.random() * 1000000;
+        //Double smsCode = Math.random() * 1000000;
+        Integer smsCode = SmsCodeUtils.getSmsCode(6);
         String redisStrore=smsCode.toString()+"_"+ System.currentTimeMillis();
-        stringRedisTemplate.opsForValue().set(AuthServerConstant.SMS_CODE_CACHE_PREFIX+phone,redisStrore,10,TimeUnit.SECONDS);
+        stringRedisTemplate.opsForValue().set(AuthServerConstant.SMS_CODE_CACHE_PREFIX+phone,redisStrore,5,TimeUnit.MINUTES);
 
 
         //todo 第三方工具发送短信
@@ -140,8 +144,9 @@ public class LoginController {
         //远程登录
         R login = memberFeignService.login(vo);
         if (login.getCode() == 0) {
-            MemberResponseVo data = login.getData("data", new TypeReference<MemberResponseVo>(){});
+            MemberResponseVo data = login.getData("data",new TypeReference<MemberResponseVo>(){});
             session.setAttribute(AuthServerConstant.LOGIN_USER,data);
+            log.info("保存session{}",data);
             return "redirect:http://gulimall.com";
         } else {
             Map<String, String> map = new HashMap<>();
@@ -154,7 +159,7 @@ public class LoginController {
     /**
      * 判断session是否有loginUser，没有就跳转登录页面，有就跳转首页
      */
-    @GetMapping(value = "/login.html")
+    @GetMapping({ "/login.html","/","/index","/index.html"})
     public String loginPage(HttpSession session) {
         //从session先取出来用户的信息，判断用户是否已经登录过了
         Object attribute = session.getAttribute(AuthServerConstant.LOGIN_USER);

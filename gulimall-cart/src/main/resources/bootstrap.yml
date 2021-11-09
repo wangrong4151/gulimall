@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: gulimall-car
+
+  cloud:
+    nacos:
+      config:
+        server-addr: localhost:8848
+        namespace: 62eaa08e-68a4-46fe-b462-d77177d1fe74
+
+

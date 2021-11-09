@@ -51,6 +51,9 @@ public class SearchResult {
 
         public BrandVo(Long brandId, String brandImg, String brandName) {
         }
+
+        public BrandVo() {
+        }
     }
 
     @Data
@@ -59,6 +62,9 @@ public class SearchResult {
         private String catalogName;
 
         public CatalogVo(Long catelogId, String catelogName) {
+        }
+
+        public CatalogVo() {
         }
     }
 
@@ -70,6 +76,9 @@ public class SearchResult {
         private List<String> attrValue;
 
         public AttrVo(Long attrId, String attrName, ArrayList<String> attrValues) {
+        }
+        public AttrVo(){
+
         }
     }
 }

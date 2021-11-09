@@ -1,11 +1,18 @@
 package com.atguigu.gulimall.auth.config;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.session.web.http.CookieSerializer;
+import org.springframework.session.web.http.DefaultCookieSerializer;
+
 /**
  * @Author wr
  * @Date 2021/8/26 14:56
  * @Version 1.0
  */
-@configuration
+@Configuration
 public class GulimallSessionConfig {
     @Bean // redis的json序列化
     public RedisSerializer<Object> springSessionDefaultRedisSerializer() {

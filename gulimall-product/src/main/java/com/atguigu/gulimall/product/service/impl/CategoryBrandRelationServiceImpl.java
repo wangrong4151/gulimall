@@ -104,4 +104,10 @@ public class CategoryBrandRelationServiceImpl extends ServiceImpl<CategoryBrandR
         return collect;
     }
 
+    @Override
+    public void updateCategory(Long catId, String name) {
+        // 这里可以按照上面的方法来，但是这里使用了另外一种方式
+        this.baseMapper.updateCategory(catId, name);
+    }
+
 }

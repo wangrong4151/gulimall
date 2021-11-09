@@ -9,10 +9,15 @@ spring:
       discovery:
         server-addr: localhost:8848
 
-
-
+  redis:
+    host: 192.168.56.10
+    port: 6379
   thymeleaf:
     cache: false
+    suffix: .html
+    prefix: classpath:/templates/
+  session:
+    store-type: redis
 
 
 

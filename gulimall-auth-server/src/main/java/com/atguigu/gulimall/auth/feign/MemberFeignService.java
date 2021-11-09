@@ -3,9 +3,11 @@ package com.atguigu.gulimall.auth.feign;
 import com.atguigu.common.utils.R;
 import com.atguigu.gulimall.auth.Vo.UserLoginVo;
 import com.atguigu.gulimall.auth.Vo.UserRegisterVo;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+@FeignClient("gulimall-member")
 public interface MemberFeignService {
     @PostMapping(value = "/member/member/register")
     R register(@RequestBody UserRegisterVo vo);

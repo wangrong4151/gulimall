@@ -3,11 +3,12 @@ package com.atguigu.common.to;
 import lombok.Data;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @ToString
-public class MemberResponseVo {
+public class MemberResponseVo implements Serializable {
     private static final long serialVersionUID = 5573669251256409786L;
 
     private Long id;

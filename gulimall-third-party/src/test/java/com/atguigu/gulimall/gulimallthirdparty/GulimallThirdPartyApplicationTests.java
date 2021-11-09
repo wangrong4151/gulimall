@@ -1,4 +1,4 @@
-package com.atguigu.gulimall.gulimallthirdparty;
+/*package com.atguigu.gulimall.gulimallthirdparty;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -10,4 +10,4 @@ class GulimallThirdPartyApplicationTests {
     void contextLoads() {
     }
 
-}
+}*/

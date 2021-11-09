@@ -61,6 +61,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberDao, MemberEntity> impl
         entity.setCreateTime(time);
         entity.setStatus(0);
         entity.setNickname(vo.getUserName());
+        entity.setUsername(vo.getUserName());
         entity.setBirth(new Date());
         entity.setEmail("xxx@gmail.com");
         entity.setGender(1);
@@ -73,7 +74,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberDao, MemberEntity> impl
     public MemberEntity login(MemberUserLoginVo loginVo) {
         String loginacct = loginVo.getLoginacct();
         String password = loginVo.getPassword();
-        MemberEntity memberEntity = this.baseMapper.selectOne(new QueryWrapper<MemberEntity>().eq("username", loginacct).eq("mobile", loginacct));
+        MemberEntity memberEntity = this.baseMapper.selectOne(new QueryWrapper<MemberEntity>().eq("username", loginacct).or().eq("mobile", loginacct));
         String password1 = memberEntity.getPassword();
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         boolean matches = bCryptPasswordEncoder.matches(password, password1);
