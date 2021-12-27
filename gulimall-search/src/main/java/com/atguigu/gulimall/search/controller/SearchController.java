@@ -22,6 +22,7 @@ public class SearchController {
 
     /**
      * 自动将页面提交过来的所有请求参数封装成我们指定的对象
+     *
      * @param param
      * @return
      */
@@ -29,12 +30,12 @@ public class SearchController {
     public String listPage(SearchParam param, Model model, HttpServletRequest request) {
 
         param.set_queryString(request.getQueryString());
-        log.info("原生所有查询属性 {}",request.getQueryString());
+        log.info("原生所有查询属性 {}", request.getQueryString());
         //1、根据传递来的页面的查询参数，去es中检索商品
         SearchResult result = searchService.getSearchResult(param);
 
-        model.addAttribute("result",result);
-        model.addAttribute("param",param);
+        model.addAttribute("result", result);
+        model.addAttribute("param", param);
 
         return "list";
     }

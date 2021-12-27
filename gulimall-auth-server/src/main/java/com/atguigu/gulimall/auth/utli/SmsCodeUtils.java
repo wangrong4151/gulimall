@@ -7,11 +7,11 @@ import java.util.Random;
 
 public class SmsCodeUtils {
 
-    public static int  getSmsCode(int num){
+    public static int getSmsCode(int num) {
         Random random = new Random();
         String member = "";
         for (int i = 0; i < num; i++) {
-            member+=random.nextInt(10);
+            member += random.nextInt(10);
         }
 
         return Integer.parseInt(member);

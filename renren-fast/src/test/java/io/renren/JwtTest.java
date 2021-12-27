@@ -26,10 +26,10 @@ public class JwtTest {
     }
 
     public static void main(String[] args) {
-        List<String> strings = Arrays.asList("abc", "", "bc", "efg", "abcd","", "jkl");
+        List<String> strings = Arrays.asList("abc", "", "bc", "efg", "abcd", "", "jkl");
         List<String> filtered = strings.stream().filter(string -> !string.isEmpty()).collect(Collectors.toList());
         System.out.println(filtered);
-        strings.stream().forEach(i-> System.out.println(i));
+        strings.stream().forEach(i -> System.out.println(i));
         List<String> collect = strings.stream().map(i -> i + i).collect(Collectors.toList());
         System.out.println(collect);
 

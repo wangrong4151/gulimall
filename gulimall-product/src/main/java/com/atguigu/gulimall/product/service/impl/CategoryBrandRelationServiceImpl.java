@@ -57,7 +57,7 @@ public class CategoryBrandRelationServiceImpl extends ServiceImpl<CategoryBrandR
     @Override
     public List<BrandsVo> brandsList(Map<String, Object> params) {
 
-        Long catId = Long.parseLong((String) params.get("catId")) ;
+        Long catId = Long.parseLong((String) params.get("catId"));
         List<BrandEntity> vos = categoryBrandRelationService.getBrandsByCatId(catId);
 
         List<BrandsVo> collect = vos.stream().map(item -> {
@@ -74,7 +74,7 @@ public class CategoryBrandRelationServiceImpl extends ServiceImpl<CategoryBrandR
     public List<CatelogVo> withCatelog(Map<String, Object> params) {
 
         String brandId = (String) params.get("brandId");
-        if(StringUtils.isEmpty(brandId)){
+        if (StringUtils.isEmpty(brandId)) {
             throw new RuntimeException("brandId不能为空");
         }
         List<CategoryBrandRelationEntity> brandRelationEntities = categoryBrandRelationDao.selectList(new QueryWrapper<CategoryBrandRelationEntity>().eq("brand_id", brandId));

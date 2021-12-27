@@ -6,12 +6,12 @@ import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 成长值变化历史记录
- * 
+ *
  * @author wr
  * @email 1393224151@qq.com
  * @date 2021-07-23 15:42:17
  */
 @Mapper
 public interface GrowthChangeHistoryDao extends BaseMapper<GrowthChangeHistoryEntity> {
-	
+
 }

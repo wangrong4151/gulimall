@@ -14,11 +14,12 @@ public class MyRedissonConfig {
 
     /**
      * 所有对Redisson的使用都是通过RedissonClient对象
+     *
      * @return
      * @throws IOException
      */
-    @Bean(destroyMethod="shutdown")
-    RedissonClient redisson(@Value("spring.redis.host")String host) throws IOException {
+    @Bean(destroyMethod = "shutdown")
+    RedissonClient redisson(@Value("spring.redis.host") String host) throws IOException {
         // 1、创建配置
         Config config = new Config();
         // 集群模式

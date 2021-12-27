@@ -7,20 +7,20 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public interface CartService {
-     List<CartItemVo> getUserCartItems();
+    List<CartItemVo> getUserCartItems();
 
-     CartVo getCart() throws ExecutionException, InterruptedException;
+    CartVo getCart() throws ExecutionException, InterruptedException;
 
 
-     void clearCartInfo(String cartKey);
+    void clearCartInfo(String cartKey);
 
-     CartItemVo addToCart(Long skuId, Integer num) throws ExecutionException, InterruptedException;
+    CartItemVo addToCart(Long skuId, Integer num) throws ExecutionException, InterruptedException;
 
-     CartItemVo getCartItem(Long skuId);
+    CartItemVo getCartItem(Long skuId);
 
-     void changeItemCount(Long skuId, Integer num);
+    void changeItemCount(Long skuId, Integer num);
 
-     void deleteIdCartInfo(Integer skuId);
+    void deleteIdCartInfo(Integer skuId);
 
-     void checkItem(Long skuId, Integer checked);
+    void checkItem(Long skuId, Integer checked);
 }

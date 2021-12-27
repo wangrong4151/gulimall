@@ -7,8 +7,9 @@ import lombok.Data;
 import org.w3c.dom.Attr;
 
 import java.util.List;
+
 @Data
-public class AttrGroupWithAttrVo  {
+public class AttrGroupWithAttrVo {
     /**
      * 分组id
      */

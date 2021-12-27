@@ -32,7 +32,7 @@ public class ProductAttrValueServiceImpl extends ServiceImpl<ProductAttrValueDao
 
     @Override
     public void saveProductAttr(List<ProductAttrValueEntity> collect) {
-        if(collect.size()>0){
+        if (collect.size() > 0) {
             this.saveBatch(collect);
         }
     }
@@ -49,7 +49,7 @@ public class ProductAttrValueServiceImpl extends ServiceImpl<ProductAttrValueDao
     @Override
     public void updateSpuAttr(Long spuId, List<ProductAttrValueEntity> entities) {
         //1、删除spuId之前对应的所有属性
-        this.baseMapper.delete(new QueryWrapper<ProductAttrValueEntity>().eq("spu_id",spuId));
+        this.baseMapper.delete(new QueryWrapper<ProductAttrValueEntity>().eq("spu_id", spuId));
 
         //2、添加商品规格信息
         List<ProductAttrValueEntity> collect = entities.stream().map(item -> {

@@ -21,14 +21,14 @@ public class SmsComponent {
     private String templateId;
     private String appcode;
 
-    public void sendCode(String phone,String code) {
+    public void sendCode(String phone, String code) {
         String method = "POST";
         Map<String, String> headers = new HashMap<String, String>();
         //最后在header中的格式(中间是英文空格)为Authorization:APPCODE 83359fd73fe94948385f570e3c139105
         headers.put("Authorization", "APPCODE " + appcode);
         Map<String, String> querys = new HashMap<String, String>();
         querys.put("mobile", phone);
-        querys.put("param", "**code**:"+code);
+        querys.put("param", "**code**:" + code);
         querys.put("smsSignId", smsSignId);
         querys.put("templateId", templateId);
         Map<String, String> bodys = new HashMap<String, String>();

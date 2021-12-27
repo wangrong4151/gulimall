@@ -3,7 +3,7 @@ package com.atguigu.gulimall.ware.controller;
 import java.util.Arrays;
 import java.util.Map;
 
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+//import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,7 +15,6 @@ import com.atguigu.gulimall.ware.entity.WareInfoEntity;
 import com.atguigu.gulimall.ware.service.WareInfoService;
 import com.atguigu.common.utils.PageUtils;
 import com.atguigu.common.utils.R;
-
 
 
 /**
@@ -35,8 +34,8 @@ public class WareInfoController {
      * 列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("ware:wareinfo:list")
-    public R list(@RequestParam Map<String, Object> params){
+    //@RequiresPermissions("ware:wareinfo:list")
+    public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = wareInfoService.queryPage(params);
 
         return R.ok().put("page", page);
@@ -47,9 +46,9 @@ public class WareInfoController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    @RequiresPermissions("ware:wareinfo:info")
-    public R info(@PathVariable("id") Long id){
-		WareInfoEntity wareInfo = wareInfoService.getById(id);
+    //@RequiresPermissions("ware:wareinfo:info")
+    public R info(@PathVariable("id") Long id) {
+        WareInfoEntity wareInfo = wareInfoService.getById(id);
 
         return R.ok().put("wareInfo", wareInfo);
     }
@@ -58,9 +57,9 @@ public class WareInfoController {
      * 保存
      */
     @RequestMapping("/save")
-    @RequiresPermissions("ware:wareinfo:save")
-    public R save(@RequestBody WareInfoEntity wareInfo){
-		wareInfoService.save(wareInfo);
+    //@RequiresPermissions("ware:wareinfo:save")
+    public R save(@RequestBody WareInfoEntity wareInfo) {
+        wareInfoService.save(wareInfo);
 
         return R.ok();
     }
@@ -69,9 +68,9 @@ public class WareInfoController {
      * 修改
      */
     @RequestMapping("/update")
-    @RequiresPermissions("ware:wareinfo:update")
-    public R update(@RequestBody WareInfoEntity wareInfo){
-		wareInfoService.updateById(wareInfo);
+    //@RequiresPermissions("ware:wareinfo:update")
+    public R update(@RequestBody WareInfoEntity wareInfo) {
+        wareInfoService.updateById(wareInfo);
 
         return R.ok();
     }
@@ -80,9 +79,9 @@ public class WareInfoController {
      * 删除
      */
     @RequestMapping("/delete")
-    @RequiresPermissions("ware:wareinfo:delete")
-    public R delete(@RequestBody Long[] ids){
-		wareInfoService.removeByIds(Arrays.asList(ids));
+    //@RequiresPermissions("ware:wareinfo:delete")
+    public R delete(@RequestBody Long[] ids) {
+        wareInfoService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }

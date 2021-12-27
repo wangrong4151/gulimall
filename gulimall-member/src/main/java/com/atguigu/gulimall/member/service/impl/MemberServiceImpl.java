@@ -15,6 +15,7 @@ import java.lang.reflect.Member;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -31,6 +32,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberDao, MemberEntity> impl
 
     @Autowired
     private MemberLevelDao memberLevelDao;
+
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         IPage<MemberEntity> page = this.page(
@@ -57,7 +59,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberDao, MemberEntity> impl
         entity.setPassword(bCryptPasswordEncoder.encode(vo.getPassword()));
         // 其他的默认信息
         entity.setCity("湖南 长沙");
-        Date time =Calendar.getInstance().getTime();
+        Date time = Calendar.getInstance().getTime();
         entity.setCreateTime(time);
         entity.setStatus(0);
         entity.setNickname(vo.getUserName());
@@ -78,7 +80,7 @@ public class MemberServiceImpl extends ServiceImpl<MemberDao, MemberEntity> impl
         String password1 = memberEntity.getPassword();
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         boolean matches = bCryptPasswordEncoder.matches(password, password1);
-        if(matches){
+        if (matches) {
             return memberEntity;
         }
 

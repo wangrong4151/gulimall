@@ -20,16 +20,17 @@ import java.util.List;
 public class ElasticSaveController {
     @Autowired
     private ProductSaveService productSaveService;
+
     /**
      * 上架商品
      */
     @PostMapping("/product")
-    public R productStatusUp(@RequestBody List<SkuEsModel> skuEsModels){
+    public R productStatusUp(@RequestBody List<SkuEsModel> skuEsModels) {
 
         boolean status;
         try {
             status = productSaveService.productStatusUp(skuEsModels);
-            if(!status){
+            if (!status) {
                 return R.ok();
             }
         } catch (IOException e) {

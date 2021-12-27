@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
+
 @Slf4j
 @Controller
 public class LoginController {
@@ -51,8 +52,8 @@ public class LoginController {
         if (!StringUtils.isEmpty(redisCode)) {
             String time = redisCode.split("_")[1];
             long currentTimeMillis = System.currentTimeMillis();
-            if(currentTimeMillis-Long.parseLong(time)<60){
-                return R.error(BizCodeEnum.SMS_CODE_EXCEPTION.getCode(),BizCodeEnum.SMS_CODE_EXCEPTION.getMessage());
+            if (currentTimeMillis - Long.parseLong(time) < 60) {
+                return R.error(BizCodeEnum.SMS_CODE_EXCEPTION.getCode(), BizCodeEnum.SMS_CODE_EXCEPTION.getMessage());
             }
         }
 
@@ -62,25 +63,24 @@ public class LoginController {
 //        String redisValue = code+"_"+System.currentTimeMillis();
         //Double smsCode = Math.random() * 1000000;
         Integer smsCode = SmsCodeUtils.getSmsCode(6);
-        String redisStrore=smsCode.toString()+"_"+ System.currentTimeMillis();
-        stringRedisTemplate.opsForValue().set(AuthServerConstant.SMS_CODE_CACHE_PREFIX+phone,redisStrore,5,TimeUnit.MINUTES);
+        String redisStrore = smsCode.toString() + "_" + System.currentTimeMillis();
+        stringRedisTemplate.opsForValue().set(AuthServerConstant.SMS_CODE_CACHE_PREFIX + phone, redisStrore, 5, TimeUnit.MINUTES);
 
 
         //todo 第三方工具发送短信
         //thirdPartFeignService.sendCode(phone, smsCode.toString());
-        log.info("验证码:{}",smsCode);
+        log.info("验证码:{}", smsCode);
         return R.ok();
     }
 
 
-
     /**
-     *
      * TODO: 重定向携带数据【request域失效】：利用session原理，将数据放在session中。
      * TODO: 只要跳转到下一个页面取出这个数据以后，session里面的数据就会删掉
      * TODO: 分布式下session问题
      * RedirectAttributes：重定向也可以保留数据，不会丢失
      * 用户注册
+     *
      * @return
      */
     @PostMapping(value = "/register")
@@ -105,37 +105,36 @@ public class LoginController {
         ValueOperations<String, String> valueOperations = stringRedisTemplate.opsForValue();
         String codeRedis = valueOperations.get(AuthServerConstant.SMS_CODE_CACHE_PREFIX + vos.getPhone());
         // 判断验证码是否正确【有BUG，如果字符串存储有问题，没有解析出code，数据为空，导致验证码永远错误】
-        if(!StringUtils.isEmpty(codeRedis) && code.equals(codeRedis.split("_")[0])){
+        if (!StringUtils.isEmpty(codeRedis) && code.equals(codeRedis.split("_")[0])) {
 
 
             //删除验证码（不可重复使用）;令牌机制
-            stringRedisTemplate.delete(AuthServerConstant.SMS_CODE_CACHE_PREFIX+vos.getPhone());
+            stringRedisTemplate.delete(AuthServerConstant.SMS_CODE_CACHE_PREFIX + vos.getPhone());
             //验证码通过，真正注册，调用远程服务进行注册【会员服务】
-            R  r= memberFeignService.register(vos);
+            R r = memberFeignService.register(vos);
             //成功
-            if(r.getCode()==0){
+            if (r.getCode() == 0) {
                 return "redirect:http://auth.gulimall.com/login.html";
-            }else{
+            } else {
                 Map<String, String> errors = new HashMap<>();
                 //调用失败，返回注册页并显示错误信息
 
-                errors.put("msg", r.getData("msg",new TypeReference<String>(){}));
+                errors.put("msg", r.getData("msg", new TypeReference<String>() {
+                }));
                 attributes.addFlashAttribute("errors", errors);
                 return "redirect:http://auth.gulimall.com/reg.html";
             }
 
-        }else{
+        } else {
             // redis中验证码过期
             Map<String, String> errors = new HashMap<>();
-            errors.put("code","验证码过期");
-            attributes.addFlashAttribute("errors",errors);
+            errors.put("code", "验证码过期");
+            attributes.addFlashAttribute("errors", errors);
             return "redirect:http://auth.gulimall.com/reg.html";
         }
 
 
-
-
-                //验证码错误
+        //验证码错误
 
     }
 
@@ -144,13 +143,15 @@ public class LoginController {
         //远程登录
         R login = memberFeignService.login(vo);
         if (login.getCode() == 0) {
-            MemberResponseVo data = login.getData("data",new TypeReference<MemberResponseVo>(){});
-            session.setAttribute(AuthServerConstant.LOGIN_USER,data);
-            log.info("保存session{}",data);
+            MemberResponseVo data = login.getData("data", new TypeReference<MemberResponseVo>() {
+            });
+            session.setAttribute(AuthServerConstant.LOGIN_USER, data);
+            log.info("保存session{}", data);
             return "redirect:http://gulimall.com";
         } else {
             Map<String, String> map = new HashMap<>();
-            map.put("msg",login.getData("msg",new TypeReference<String>(){}));
+            map.put("msg", login.getData("msg", new TypeReference<String>() {
+            }));
             attributes.addFlashAttribute(map);
             return "redirect:http://auth.gulimall.com/login.html";
         }
@@ -159,7 +160,7 @@ public class LoginController {
     /**
      * 判断session是否有loginUser，没有就跳转登录页面，有就跳转首页
      */
-    @GetMapping({ "/login.html","/","/index","/index.html"})
+    @GetMapping({"/login.html", "/", "/index", "/index.html"})
     public String loginPage(HttpSession session) {
         //从session先取出来用户的信息，判断用户是否已经登录过了
         Object attribute = session.getAttribute(AuthServerConstant.LOGIN_USER);

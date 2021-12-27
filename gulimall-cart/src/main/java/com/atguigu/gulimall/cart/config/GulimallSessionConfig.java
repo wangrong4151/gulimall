@@ -17,7 +17,7 @@ public class GulimallSessionConfig {
 
         //放大作用域
         cookieSerializer.setDomainName("gulimall.com");
-        cookieSerializer.setCookieName("GULISESSION");
+        cookieSerializer.setCookieName("GULISESSIONID");
 
         return cookieSerializer;
     }

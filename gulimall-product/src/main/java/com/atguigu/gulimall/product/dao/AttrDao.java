@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * 商品属性
- * 
+ *
  * @author wr
  * @email 1393224151@qq.com
  * @date 2021-05-10 20:46:36

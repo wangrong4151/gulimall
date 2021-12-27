@@ -23,5 +23,4 @@ public class SkuEsModel {
     private List<Attrs> attrs;
 
 
-
 }

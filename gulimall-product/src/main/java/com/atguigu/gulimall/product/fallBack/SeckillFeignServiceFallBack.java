@@ -9,6 +9,6 @@ import org.springframework.stereotype.Component;
 public class SeckillFeignServiceFallBack implements SeckillFeignService {
     @Override
     public R getSkuSeckilInfo(Long skuId) {
-        return R.error(BizCodeEnum.TO_MANY_REQUEST.getCode(),BizCodeEnum.TO_MANY_REQUEST.getMessage());
+        return R.error(BizCodeEnum.TO_MANY_REQUEST.getCode(), BizCodeEnum.TO_MANY_REQUEST.getMessage());
     }
 }

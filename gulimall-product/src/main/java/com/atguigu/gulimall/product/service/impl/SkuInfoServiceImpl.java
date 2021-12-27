@@ -59,18 +59,18 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
 
         QueryWrapper<SkuInfoEntity> wrapper = new QueryWrapper<>();
         String key = (String) params.get("key");
-        if(!StringUtils.isEmpty(key)){
-            wrapper.and(obj->{
-                obj.like("sku_name",key).or().like("sku_desc",key);
+        if (!StringUtils.isEmpty(key)) {
+            wrapper.and(obj -> {
+                obj.like("sku_name", key).or().like("sku_desc", key);
             });
         }
         String catelog_id = (String) params.get("catelogId");
-        if(catelog_id!=null){
-            wrapper.eq("catalog_id",catelog_id);
+        if (catelog_id != null) {
+            wrapper.eq("catalog_id", catelog_id);
         }
         String brand_id = (String) params.get("brandId");
-        if (brand_id!=null) {
-            wrapper.eq("brand_id",brand_id);
+        if (brand_id != null) {
+            wrapper.eq("brand_id", brand_id);
         }
 
 
@@ -141,11 +141,12 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
 
     /**
      * //1、sku基本信息的获取  pms_sku_info
-     *  //2、sku的图片信息    pms_sku_images
-     *  //3、获取spu的销售属性组合-> 依赖1 获取spuId
-     *  //4、获取spu的介绍-> 依赖1 获取spuId
-     *  //5、获取spu的规格参数信息-> 依赖1 获取spuId catalogId
-     *  //TODO 6、秒杀商品的优惠信息
+     * //2、sku的图片信息    pms_sku_images
+     * //3、获取spu的销售属性组合-> 依赖1 获取spuId
+     * //4、获取spu的介绍-> 依赖1 获取spuId
+     * //5、获取spu的规格参数信息-> 依赖1 获取spuId catalogId
+     * //TODO 6、秒杀商品的优惠信息
+     *
      * @param skuId
      * @return
      */
@@ -185,7 +186,7 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
 
         CompletableFuture<Void> seckillFuture = CompletableFuture.runAsync(() -> {
             //6、远程调用查询当前sku是否参与秒杀优惠活动
-            R skuSeckilInfo = seckillFeignService.getSkuSeckilInfo(skuId);
+           /* R skuSeckilInfo = seckillFeignService.getSkuSeckilInfo(skuId);
             if (skuSeckilInfo.getCode()==0) {
                 SeckillSkuVo seckillSkuVo = skuSeckilInfo.getData("data", new TypeReference<SeckillSkuVo>(){});
                 skuItemVo.setSeckillSkuVo(seckillSkuVo);
@@ -195,7 +196,7 @@ public class SkuInfoServiceImpl extends ServiceImpl<SkuInfoDao, SkuInfoEntity> i
                         skuItemVo.setSeckillSkuVo(null);
                     }
                 }
-            }
+            }*/
         }, executor);
 
         CompletableFuture.allOf(skuInfoFuture, saleAttrFuture, spuDescFuture, attrGroupFuture, imagesFuture, seckillFuture).get();

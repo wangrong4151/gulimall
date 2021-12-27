@@ -71,39 +71,37 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
     @Autowired
     private CategoryService categoryService;
 
-   /* @Autowired
-    private WareFeignService wareFeignService;
+    /* @Autowired
+     private WareFeignService wareFeignService;
 
-    @Autowired
-    private SearchFeignService searchFeignService;*/
+     @Autowired
+     private SearchFeignService searchFeignService;*/
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         QueryWrapper<SpuInfoEntity> wrapper = new QueryWrapper<>();
 
         String key = (String) params.get("key");
-        if(!StringUtils.isEmpty(key)){
-            wrapper.and(obj->{
-                obj.like("spu_name",key).or().like("spu_description",key);
+        if (!StringUtils.isEmpty(key)) {
+            wrapper.and(obj -> {
+                obj.like("spu_name", key).or().like("spu_description", key);
             });
         }
         String publishStatus = (String) params.get("publishStatus");
         if (!StringUtils.isEmpty(publishStatus)) {
-            wrapper.eq("publishStatus",publishStatus);
+            wrapper.eq("publishStatus", publishStatus);
         }
         String catelog_id = (String) params.get("catelogId");
-        if(catelog_id!=null){
-            wrapper.eq("catalog_id",catelog_id);
+        if (catelog_id != null) {
+            wrapper.eq("catalog_id", catelog_id);
         }
         String brand_id = (String) params.get("brandId");
-        if (brand_id!=null) {
-            wrapper.eq("brand_id",brand_id);
+        if (brand_id != null) {
+            wrapper.eq("brand_id", brand_id);
         }
 
 
         IPage<SpuInfoEntity> page = this.page(new Query<SpuInfoEntity>().getPage(params), wrapper);
         PageUtils pageUtils = new PageUtils(page);
-
-
 
 
         return pageUtils;
@@ -251,11 +249,12 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
         try {
             R skuHasStock = wareFeignService.getSkuHasStock(skuIdList);
             //
-            TypeReference<List<SkuHasStockVo>> typeReference = new TypeReference<List<SkuHasStockVo>>() {};
+            TypeReference<List<SkuHasStockVo>> typeReference = new TypeReference<List<SkuHasStockVo>>() {
+            };
             stockMap = skuHasStock.getData(typeReference).stream()
                     .collect(Collectors.toMap(SkuHasStockVo::getSkuId, item -> item.getHasStock()));
         } catch (Exception e) {
-            log.error("库存服务查询异常：原因{}",e);
+            log.error("库存服务查询异常：原因{}", e);
         }
 
         //2、封装每个sku的信息
@@ -289,7 +288,7 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
             //设置检索属性
             esModel.setAttrs(attrsList);
 
-            BeanUtils.copyProperties(sku,esModel);
+            BeanUtils.copyProperties(sku, esModel);
 
             return esModel;
         }).collect(Collectors.toList());

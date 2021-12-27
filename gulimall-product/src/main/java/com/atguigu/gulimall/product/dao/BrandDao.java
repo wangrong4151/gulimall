@@ -6,12 +6,12 @@ import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 品牌
- * 
+ *
  * @author wr
  * @email 1393224151@qq.com
  * @date 2021-05-10 20:46:36
  */
 @Mapper
 public interface BrandDao extends BaseMapper<BrandEntity> {
-	
+
 }

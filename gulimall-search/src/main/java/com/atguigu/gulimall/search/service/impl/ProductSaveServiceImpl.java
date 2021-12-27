@@ -28,6 +28,7 @@ public class ProductSaveServiceImpl implements ProductSaveService {
 
     @Autowired
     private RestHighLevelClient client;
+
     @Override
     public boolean productStatusUp(List<SkuEsModel> skuEsModels) throws IOException {
 
@@ -43,15 +44,15 @@ public class ProductSaveServiceImpl implements ProductSaveService {
         }
         // bulk批量保存
 
-            BulkResponse bulk = client.bulk(bulkRequest, GulimallElasticSearchConfig.COMMON_OPTIONS);
+        BulkResponse bulk = client.bulk(bulkRequest, GulimallElasticSearchConfig.COMMON_OPTIONS);
 
         // TODO 是否拥有错误
         boolean b = bulk.hasFailures();
-        if(b){
+        if (b) {
             List<String> collect = Arrays.stream(bulk.getItems()).map(item -> {
                 return item.getId();
             }).collect(Collectors.toList());
-            log.error("商品上架错误{}",collect);
+            log.error("商品上架错误{}", collect);
         }
         return b;
     }

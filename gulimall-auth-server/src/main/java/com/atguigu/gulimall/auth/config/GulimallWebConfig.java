@@ -10,7 +10,7 @@ public class GulimallWebConfig implements WebMvcConfigurer {
      * 视图映射:发送一个请求，直接跳转到一个页面
      */
     @Override
-    public void addViewControllers(ViewControllerRegistry registry){
+    public void addViewControllers(ViewControllerRegistry registry) {
 
         registry.addViewController("/reg.html").setViewName("reg");
     }

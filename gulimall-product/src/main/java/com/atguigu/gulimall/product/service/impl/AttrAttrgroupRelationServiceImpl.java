@@ -33,13 +33,13 @@ public class AttrAttrgroupRelationServiceImpl extends ServiceImpl<AttrAttrgroupR
     public static void main(String[] args) {
         Map<String, Object> map = new HashMap<>();
         List<String> list = new ArrayList<>();
-        List<Map<String,Object>> list2 = new ArrayList<>();
+        List<Map<String, Object>> list2 = new ArrayList<>();
         list.add("a");
         list.add("b");
         list.add("c");
         list.add("d");
         for (String o : list) {
-            map.put("AA",o);
+            map.put("AA", o);
             System.out.println(list2);
             list2.add(map);
             System.out.println(list2);

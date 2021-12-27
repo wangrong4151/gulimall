@@ -18,6 +18,7 @@ public class ItemController {
 
     /**
      * 展示当前sku的详情
+     *
      * @param skuId
      * @return
      */
@@ -33,7 +34,7 @@ public class ItemController {
          * 5、spu规格与包装【参数信息】
          */
         SkuItemVo vos = skuInfoService.item(skuId);
-        model.addAttribute("item",vos);
+        model.addAttribute("item", vos);
         return "item";
     }
 

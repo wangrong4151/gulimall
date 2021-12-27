@@ -17,10 +17,7 @@ import com.atguigu.common.utils.PageUtils;
 import com.atguigu.common.utils.R;
 
 
-
 /**
- * 
- *
  * @author wr
  * @email 1393224151@qq.com
  * @date 2021-07-23 15:42:17
@@ -36,7 +33,7 @@ public class UndoLogController {
      */
     @RequestMapping("/list")
     @RequiresPermissions("member:undolog:list")
-    public R list(@RequestParam Map<String, Object> params){
+    public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = undoLogService.queryPage(params);
 
         return R.ok().put("page", page);
@@ -48,8 +45,8 @@ public class UndoLogController {
      */
     @RequestMapping("/info/{id}")
     @RequiresPermissions("member:undolog:info")
-    public R info(@PathVariable("id") Long id){
-		UndoLogEntity undoLog = undoLogService.getById(id);
+    public R info(@PathVariable("id") Long id) {
+        UndoLogEntity undoLog = undoLogService.getById(id);
 
         return R.ok().put("undoLog", undoLog);
     }
@@ -59,8 +56,8 @@ public class UndoLogController {
      */
     @RequestMapping("/save")
     @RequiresPermissions("member:undolog:save")
-    public R save(@RequestBody UndoLogEntity undoLog){
-		undoLogService.save(undoLog);
+    public R save(@RequestBody UndoLogEntity undoLog) {
+        undoLogService.save(undoLog);
 
         return R.ok();
     }
@@ -70,8 +67,8 @@ public class UndoLogController {
      */
     @RequestMapping("/update")
     @RequiresPermissions("member:undolog:update")
-    public R update(@RequestBody UndoLogEntity undoLog){
-		undoLogService.updateById(undoLog);
+    public R update(@RequestBody UndoLogEntity undoLog) {
+        undoLogService.updateById(undoLog);
 
         return R.ok();
     }
@@ -81,8 +78,8 @@ public class UndoLogController {
      */
     @RequestMapping("/delete")
     @RequiresPermissions("member:undolog:delete")
-    public R delete(@RequestBody Long[] ids){
-		undoLogService.removeByIds(Arrays.asList(ids));
+    public R delete(@RequestBody Long[] ids) {
+        undoLogService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }

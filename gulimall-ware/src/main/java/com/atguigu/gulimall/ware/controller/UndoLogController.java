@@ -3,7 +3,7 @@ package com.atguigu.gulimall.ware.controller;
 import java.util.Arrays;
 import java.util.Map;
 
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+//import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,10 +17,7 @@ import com.atguigu.common.utils.PageUtils;
 import com.atguigu.common.utils.R;
 
 
-
 /**
- * 
- *
  * @author wr
  * @email 1393224151@qq.com
  * @date 2021-07-23 17:20:08
@@ -35,8 +32,8 @@ public class UndoLogController {
      * 列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("ware:undolog:list")
-    public R list(@RequestParam Map<String, Object> params){
+    //@RequiresPermissions("ware:undolog:list")
+    public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = undoLogService.queryPage(params);
 
         return R.ok().put("page", page);
@@ -47,9 +44,9 @@ public class UndoLogController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    @RequiresPermissions("ware:undolog:info")
-    public R info(@PathVariable("id") Long id){
-		UndoLogEntity undoLog = undoLogService.getById(id);
+    //@RequiresPermissions("ware:undolog:info")
+    public R info(@PathVariable("id") Long id) {
+        UndoLogEntity undoLog = undoLogService.getById(id);
 
         return R.ok().put("undoLog", undoLog);
     }
@@ -58,9 +55,9 @@ public class UndoLogController {
      * 保存
      */
     @RequestMapping("/save")
-    @RequiresPermissions("ware:undolog:save")
-    public R save(@RequestBody UndoLogEntity undoLog){
-		undoLogService.save(undoLog);
+    //@RequiresPermissions("ware:undolog:save")
+    public R save(@RequestBody UndoLogEntity undoLog) {
+        undoLogService.save(undoLog);
 
         return R.ok();
     }
@@ -69,9 +66,9 @@ public class UndoLogController {
      * 修改
      */
     @RequestMapping("/update")
-    @RequiresPermissions("ware:undolog:update")
-    public R update(@RequestBody UndoLogEntity undoLog){
-		undoLogService.updateById(undoLog);
+    //@RequiresPermissions("ware:undolog:update")
+    public R update(@RequestBody UndoLogEntity undoLog) {
+        undoLogService.updateById(undoLog);
 
         return R.ok();
     }
@@ -80,9 +77,9 @@ public class UndoLogController {
      * 删除
      */
     @RequestMapping("/delete")
-    @RequiresPermissions("ware:undolog:delete")
-    public R delete(@RequestBody Long[] ids){
-		undoLogService.removeByIds(Arrays.asList(ids));
+    //@RequiresPermissions("ware:undolog:delete")
+    public R delete(@RequestBody Long[] ids) {
+        undoLogService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }

@@ -18,7 +18,7 @@ public class FastDfsController {
         log.info(file.getOriginalFilename() + ":" + file.getSize());
         String originalFilename = file.getOriginalFilename();
         // xxx.jpg
-        String extName = originalFilename.substring(originalFilename.lastIndexOf(".")+1);
+        String extName = originalFilename.substring(originalFilename.lastIndexOf(".") + 1);
         log.info(extName);
         String filePath = null;
         try {
@@ -27,6 +27,6 @@ public class FastDfsController {
             e.printStackTrace();
         }
 
-        return R.ok("上传成功").put("data",filePath);
+        return R.ok("上传成功").put("data", filePath);
     }
 }

@@ -9,7 +9,9 @@ public class SearchParam {
     // 页面传递过来的全文匹配关键字
     private String keyword;
 
-    /** 三级分类id*/
+    /**
+     * 三级分类id
+     */
     private Long catalog3Id;
     //排序条件：sort=price/salecount/hotscore_desc/asc
     private String sort;

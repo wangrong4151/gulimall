@@ -21,10 +21,13 @@ public interface CategoryService extends IService<CategoryEntity> {
     PageUtils queryPage(Map<String, Object> params);
 
     List<CategoryEntity> listWithTree();
+
     R removeByIds(List<Long> ids);
 
     Long[] findCateLogPath(Long catelogId);
+
     void updateCascade(CategoryEntity category);
+
     Map<String, List<Catelog2Vo>> getCatalogJson();
 
     List<CategoryEntity> getLevel1Categorys();

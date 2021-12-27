@@ -14,7 +14,6 @@ import com.atguigu.common.utils.PageUtils;
 import com.atguigu.common.utils.R;
 
 
-
 /**
  * spu信息
  *
@@ -32,8 +31,8 @@ public class SpuInfoController {
      * 列表
      */
     @RequestMapping("/list")
-  //  @RequiresPermissions("product:spuinfo:list")
-    public R list(@RequestParam Map<String, Object> params){
+    //  @RequiresPermissions("product:spuinfo:list")
+    public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = spuInfoService.queryPage(params);
 
         return R.ok().put("page", page);
@@ -44,9 +43,9 @@ public class SpuInfoController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-   // @RequiresPermissions("product:spuinfo:info")
-    public R info(@PathVariable("id") Long id){
-		SpuInfoEntity spuInfo = spuInfoService.getById(id);
+    // @RequiresPermissions("product:spuinfo:info")
+    public R info(@PathVariable("id") Long id) {
+        SpuInfoEntity spuInfo = spuInfoService.getById(id);
 
         return R.ok().put("spuInfo", spuInfo);
     }
@@ -55,9 +54,9 @@ public class SpuInfoController {
      * 保存
      */
     @RequestMapping("/save")
-  //  @RequiresPermissions("product:spuinfo:save")
-    public R save(@RequestBody SpuSaveVo spuSaveVo){
-		spuInfoService.saveProduct(spuSaveVo);
+    //  @RequiresPermissions("product:spuinfo:save")
+    public R save(@RequestBody SpuSaveVo spuSaveVo) {
+        spuInfoService.saveProduct(spuSaveVo);
 
         return R.ok();
     }
@@ -66,9 +65,9 @@ public class SpuInfoController {
      * 修改
      */
     @RequestMapping("/update")
- //   @RequiresPermissions("product:spuinfo:update")
-    public R update(@RequestBody SpuInfoEntity spuInfo){
-		spuInfoService.updateById(spuInfo);
+    //   @RequiresPermissions("product:spuinfo:update")
+    public R update(@RequestBody SpuInfoEntity spuInfo) {
+        spuInfoService.updateById(spuInfo);
 
         return R.ok();
     }
@@ -77,12 +76,13 @@ public class SpuInfoController {
      * 删除
      */
     @RequestMapping("/delete")
-   // @RequiresPermissions("product:spuinfo:delete")
-    public R delete(@RequestBody Long[] ids){
-		spuInfoService.removeByIds(Arrays.asList(ids));
+    // @RequiresPermissions("product:spuinfo:delete")
+    public R delete(@RequestBody Long[] ids) {
+        spuInfoService.removeByIds(Arrays.asList(ids));
 
         return R.ok();
     }
+
     //商品上架
     ///product/spuinfo/{spuId}/up
     @PostMapping(value = "/{spuId}/up")

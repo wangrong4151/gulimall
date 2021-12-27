@@ -19,30 +19,31 @@ public class GulimallExceptionControllerAdvice {
 
     /**
      * 参数非法（效验参数）异常 MethodArgumentNotValidException
+     *
      * @param e
      * @return
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public R handleValidException(MethodArgumentNotValidException e) {
-        log.error("数据效验出现问题{},异常类型{}",e.getMessage(),e.getClass());
+        log.error("数据效验出现问题{},异常类型{}", e.getMessage(), e.getClass());
         BindingResult bindingResult = e.getBindingResult();
 
-        Map<String,String> errMap = new HashMap<>();
+        Map<String, String> errMap = new HashMap<>();
         bindingResult.getFieldErrors().forEach((fieldError) -> {
-            errMap.put(fieldError.getField(),fieldError.getDefaultMessage());
+            errMap.put(fieldError.getField(), fieldError.getDefaultMessage());
         });
-        return R.error(BizCodeEnum.VAILD_EXCEPTION.getCode(),BizCodeEnum.VAILD_EXCEPTION.getMessage())
-                .put("data",errMap);
+        return R.error(BizCodeEnum.VAILD_EXCEPTION.getCode(), BizCodeEnum.VAILD_EXCEPTION.getMessage())
+                .put("data", errMap);
     }
 
 
     @ExceptionHandler(value = Throwable.class)
     public R handleException(Throwable throwable) {
 
-        log.error("错误异常{}",throwable);
+        log.error("错误异常{}", throwable);
 
-        return R.error(BizCodeEnum.UNKNOW_EXCEPTION.getCode(),BizCodeEnum.UNKNOW_EXCEPTION.getMessage());
+        return R.error(BizCodeEnum.UNKNOW_EXCEPTION.getCode(), BizCodeEnum.UNKNOW_EXCEPTION.getMessage());
     }
 
 }

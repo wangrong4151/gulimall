@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class RunTimeExceptionHandler {
     /**
      * 全局统一异常处理
+     *
      * @param exception
      * @return
      */
