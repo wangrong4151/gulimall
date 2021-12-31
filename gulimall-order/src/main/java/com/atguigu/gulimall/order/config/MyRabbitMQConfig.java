@@ -108,6 +108,11 @@ public class MyRabbitMQConfig {
                 "order.release.other.#",
                 null);
     }
+    @Bean
+    public Queue orderReleaseOtherQueue() {
+        Queue queue = new Queue("stock.release.stock.queue", true, false, false);
+        return queue;
+    }
 
 
     /**

@@ -2,7 +2,7 @@ spring:
   datasource:
     username: root
     password: root
-    url: jdbc:mysql://192.168.89.128:3306/gulimall-sms?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://192.168.89.128:3306/gulimall_sms?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
     driver-class-name: com.mysql.cj.jdbc.Driver
   cloud:
     nacos:
@@ -11,6 +11,19 @@ spring:
   application:
     name: gulimall-coupon
 
+  sentinel:
+    transport:
+      #配置sentinel dashboard地址
+      dashboard: localhost:8080
+
+    #开启feign对sentinel的支持
+    feign:
+      sentinel:
+        enabled: true
+
+  redis:
+    host: 192.168.89.128
+    port: 6379
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
   global-config:

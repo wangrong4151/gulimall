@@ -9,6 +9,16 @@ spring:
       discovery:
         server-addr: localhost:8848
 
+  sentinel:
+    transport:
+      #配置sentinel dashboard地址
+      dashboard: localhost:8080
+
+    #开启feign对sentinel的支持
+    feign:
+      sentinel:
+        enabled: true
+
   redis:
     host: 192.168.89.128
     port: 6379
