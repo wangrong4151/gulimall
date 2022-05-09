@@ -1,5 +1,7 @@
 package com.atguigu.gulimall.order.interceptor;
 
+import com.alibaba.fastjson.JSON;
+import com.atguigu.common.constant.AuthServerConstant;
 import com.atguigu.common.to.MemberResponseVo;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
@@ -8,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import java.io.PrintWriter;
 
@@ -29,9 +32,9 @@ public class LoginUserInterceptor implements HandlerInterceptor {
             return true;
         }
 
-        //获取登录的用户信息
-        MemberResponseVo attribute = (MemberResponseVo) request.getSession().getAttribute(LOGIN_USER);
-
+        HttpSession session = request.getSession();
+        //获得当前登录用户的信息
+        MemberResponseVo attribute = (MemberResponseVo) session.getAttribute(LOGIN_USER);
         if (attribute != null) {
             //把登录后用户的信息放在ThreadLocal里面进行保存
             loginUser.set(attribute);

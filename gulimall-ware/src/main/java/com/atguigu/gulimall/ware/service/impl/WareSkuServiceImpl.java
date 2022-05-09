@@ -93,8 +93,7 @@ public class WareSkuServiceImpl extends ServiceImpl<WareSkuDao, WareSkuEntity> i
         FareVo fareVo = new FareVo();
         R r = memberFeignService.info(addrId);
         if (r.getCode() == 0) {
-            MemberAddressVo memberAddressVo = r.getData("data", new TypeReference<MemberAddressVo>() {
-            });
+            MemberAddressVo memberAddressVo = r.getData("memberReceiveAddress", new TypeReference<MemberAddressVo>() {});
             if (memberAddressVo != null) {
                 String phone = memberAddressVo.getPhone();
                 //截取用户手机号码最后一位作为我们的运费计算

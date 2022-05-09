@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 
+import com.atguigu.common.log.annotation.SysLog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,6 +35,7 @@ public class CategoryController {
     /**
      * 列表数
      */
+    @SysLog("列表数")
     @RequestMapping("/list/tree")
     //@RequiresPermissions("product:category:list")
     public R list() {

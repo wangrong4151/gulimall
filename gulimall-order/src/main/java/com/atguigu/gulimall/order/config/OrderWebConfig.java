@@ -5,10 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import sun.management.counter.perf.PerfInstrumentation;
 
 @Configuration
-public class GulimallWebConfig implements WebMvcConfigurer {
+public class OrderWebConfig implements WebMvcConfigurer {
     @Autowired
     private LoginUserInterceptor loginUserInterceptor;
 

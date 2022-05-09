@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
  * @createTime: 2020-07-02 21:10
  **/
 
+
 @Configuration
 public class GuliFeignConfig {
 

@@ -143,8 +143,7 @@ public class LoginController {
         //远程登录
         R login = memberFeignService.login(vo);
         if (login.getCode() == 0) {
-            MemberResponseVo data = login.getData("data", new TypeReference<MemberResponseVo>() {
-            });
+            MemberResponseVo data = login.getData("data", new TypeReference<MemberResponseVo>() {});
             session.setAttribute(AuthServerConstant.LOGIN_USER, data);
             log.info("保存session{}", data);
             return "redirect:http://gulimall.com";

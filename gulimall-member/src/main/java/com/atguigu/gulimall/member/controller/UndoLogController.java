@@ -3,7 +3,7 @@ package com.atguigu.gulimall.member.controller;
 import java.util.Arrays;
 import java.util.Map;
 
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+//import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -32,7 +32,7 @@ public class UndoLogController {
      * 列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("member:undolog:list")
+    //@RequiresPermissions("member:undolog:list")
     public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = undoLogService.queryPage(params);
 
@@ -44,7 +44,7 @@ public class UndoLogController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    @RequiresPermissions("member:undolog:info")
+    //@RequiresPermissions("member:undolog:info")
     public R info(@PathVariable("id") Long id) {
         UndoLogEntity undoLog = undoLogService.getById(id);
 
@@ -55,7 +55,7 @@ public class UndoLogController {
      * 保存
      */
     @RequestMapping("/save")
-    @RequiresPermissions("member:undolog:save")
+    //@RequiresPermissions("member:undolog:save")
     public R save(@RequestBody UndoLogEntity undoLog) {
         undoLogService.save(undoLog);
 
@@ -66,7 +66,7 @@ public class UndoLogController {
      * 修改
      */
     @RequestMapping("/update")
-    @RequiresPermissions("member:undolog:update")
+    //@RequiresPermissions("member:undolog:update")
     public R update(@RequestBody UndoLogEntity undoLog) {
         undoLogService.updateById(undoLog);
 
@@ -77,7 +77,7 @@ public class UndoLogController {
      * 删除
      */
     @RequestMapping("/delete")
-    @RequiresPermissions("member:undolog:delete")
+    //@RequiresPermissions("member:undolog:delete")
     public R delete(@RequestBody Long[] ids) {
         undoLogService.removeByIds(Arrays.asList(ids));
 

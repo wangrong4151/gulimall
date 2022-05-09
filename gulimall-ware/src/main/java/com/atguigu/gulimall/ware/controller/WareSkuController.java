@@ -53,18 +53,8 @@ public class WareSkuController {
         }
     }
 
-    /**
-     * 获取运费信息
-     *
-     * @return
-     */
-    @GetMapping(value = "/fare")
-    public R getFare(@RequestParam("addrId") Long addrId) {
 
-        FareVo fare = wareSkuService.getFare(addrId);
 
-        return R.ok().setData(fare);
-    }
 
     /**
      * 列表

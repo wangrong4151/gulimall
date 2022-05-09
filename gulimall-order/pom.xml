@@ -79,7 +79,7 @@
             <optional>true</optional>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
             <exclusions>
@@ -94,7 +94,7 @@
             <groupId>io.seata</groupId>
             <artifactId>seata-all</artifactId>
             <version>0.9.0</version>
-        </dependency>
+        </dependency>-->
 
         <!-- 支付宝sdk -->
         <!-- https://mvnrepository.com/artifact/com.alipay.sdk/alipay-sdk-java -->
@@ -145,5 +145,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

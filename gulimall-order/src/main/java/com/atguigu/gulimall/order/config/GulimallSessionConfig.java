@@ -4,20 +4,25 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.session.web.http.CookieSerializer;
 import org.springframework.session.web.http.DefaultCookieSerializer;
 
 @Configuration
 public class GulimallSessionConfig {
     @Bean
-    DefaultCookieSerializer cookieSerializer() {
+    public CookieSerializer cookieSerializer() {
+
         DefaultCookieSerializer cookieSerializer = new DefaultCookieSerializer();
-        cookieSerializer.setCookieName("GULISESSIONID");
+        //放大作用域
         cookieSerializer.setDomainName("gulimall.com");
+        cookieSerializer.setCookieName("GULISESSIONID");
+        cookieSerializer.setCookieMaxAge(60 * 60 * 24 * 7);
         return cookieSerializer;
     }
 
+
     @Bean
-    RedisSerializer<Object> redisSerializer() {
+    public RedisSerializer<Object> springSessionDefaultRedisSerializer() {
         return new GenericJackson2JsonRedisSerializer();
     }
 }

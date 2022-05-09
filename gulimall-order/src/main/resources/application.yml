@@ -1,3 +1,8 @@
+server:
+  port: 21000
+  servlet:
+    session:
+      timeout: 30m
 spring:
   datasource:
     username: root
@@ -8,21 +13,26 @@ spring:
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848
+
   application:
     name: gulimall-order
   redis:
     host: 192.168.89.128
     port: 6379
-
   sentinel:
     transport:
       #配置sentinel dashboard地址
       dashboard: localhost:8080
 
-    #开启feign对sentinel的支持
-    feign:
-      sentinel:
-        enabled: true
+
+#开启feign对sentinel的支持
+feign:
+  sentinel:
+    enabled: true
+
+  session:
+    store-type: redis
+
 
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
@@ -32,5 +42,7 @@ mybatis-plus:
       logic-delete-value: 1
       logic-not-delete-value: 0
 
-server:
-  port: 9000
+  thymeleaf:
+    cache: false
+    suffix: .html
+    prefix: classpath:/templates/

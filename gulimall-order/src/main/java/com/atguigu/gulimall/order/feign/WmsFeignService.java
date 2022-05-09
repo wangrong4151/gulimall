@@ -18,7 +18,7 @@ public interface WmsFeignService {
      *
      * @return
      */
-    @PostMapping(value = "/ware/waresku/hasStock")
+    @PostMapping(value = "/ware/sku/hasStock")
     R getSkuHasStock(@RequestBody List<Long> skuIds);
 
 
@@ -38,6 +38,6 @@ public interface WmsFeignService {
      * @param vo
      * @return
      */
-    @PostMapping(value = "/ware/waresku/lock/order")
+    @PostMapping(value = "/ware/sku/lock/order")
     R orderLockStock(@RequestBody WareSkuLockVo vo);
 }

@@ -25,7 +25,7 @@ import com.atguigu.common.utils.R;
  * @date 2021-07-23 17:20:08
  */
 @RestController
-@RequestMapping("mapper/ware/wareordertaskdetail")
+@RequestMapping("/ware/wareordertaskdetail")
 public class WareOrderTaskDetailController {
     @Autowired
     private WareOrderTaskDetailService wareOrderTaskDetailService;

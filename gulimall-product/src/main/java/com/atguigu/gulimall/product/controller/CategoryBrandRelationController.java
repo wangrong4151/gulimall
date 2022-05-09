@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import com.atguigu.common.log.annotation.SysLog;
 import com.atguigu.gulimall.product.vo.BrandsVo;
 import com.atguigu.gulimall.product.vo.CatelogVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -84,6 +85,7 @@ public class CategoryBrandRelationController {
         return R.ok();
     }
 
+    @SysLog("")
     @GetMapping("/brands/list")
     //@RequiresPermissions("product:categorybrandrelation:list")
     public R brandsList(@RequestParam Map<String, Object> params) {

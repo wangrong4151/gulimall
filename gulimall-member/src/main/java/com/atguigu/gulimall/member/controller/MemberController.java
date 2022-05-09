@@ -8,7 +8,7 @@ import com.atguigu.gulimall.member.exception.PhoneException;
 import com.atguigu.gulimall.member.exception.UsernameException;
 import com.atguigu.gulimall.member.vo.MemberUserLoginVo;
 import com.atguigu.gulimall.member.vo.MemberUserRegisterVo;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+//import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +36,7 @@ public class MemberController {
      * 列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("member:member:list")
+    //@RequiresPermissions("member:member:list")
     public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = memberService.queryPage(params);
 
@@ -48,7 +48,7 @@ public class MemberController {
      * 信息
      */
     @RequestMapping("/info/{id}")
-    @RequiresPermissions("member:member:info")
+    //@RequiresPermissions("member:member:info")
     public R info(@PathVariable("id") Long id) {
         MemberEntity member = memberService.getById(id);
 
@@ -59,7 +59,7 @@ public class MemberController {
      * 保存
      */
     @RequestMapping("/save")
-    @RequiresPermissions("member:member:save")
+    //@RequiresPermissions("member:member:save")
     public R save(@RequestBody MemberEntity member) {
         memberService.save(member);
 
@@ -70,7 +70,7 @@ public class MemberController {
      * 修改
      */
     @RequestMapping("/update")
-    @RequiresPermissions("member:member:update")
+    //@RequiresPermissions("member:member:update")
     public R update(@RequestBody MemberEntity member) {
         memberService.updateById(member);
 
@@ -81,7 +81,7 @@ public class MemberController {
      * 删除
      */
     @RequestMapping("/delete")
-    @RequiresPermissions("member:member:delete")
+    //@RequiresPermissions("member:member:delete")
     public R delete(@RequestBody Long[] ids) {
         memberService.removeByIds(Arrays.asList(ids));
 

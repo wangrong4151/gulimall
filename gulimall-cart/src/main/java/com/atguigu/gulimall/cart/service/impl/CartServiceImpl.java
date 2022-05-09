@@ -60,15 +60,22 @@ public class CartServiceImpl implements CartService {
                 throw new CartExceptionHandler();
             }
             //筛选出选中的
-            cartItemVoList = cartItems.stream()
+           /* cartItemVoList = cartItems.stream()
                     .filter(items -> items.getCheck())
                     .map(item -> {
                         //更新为最新的价格（查询数据库）
                         BigDecimal price = productFeignService.getPrice(item.getSkuId());
                         item.setPrice(price);
                         return item;
-                    })
-                    .collect(Collectors.toList());
+                    }).collect(Collectors.toList());*/
+
+            for (CartItemVo cartItem : cartItems) {
+                if(cartItem.getCheck()){
+                    BigDecimal price = productFeignService.getPrice(cartItem.getSkuId());
+                    cartItem.setPrice(price);
+                    cartItemVoList.add(cartItem);
+                }
+            }
         }
 
         return cartItemVoList;

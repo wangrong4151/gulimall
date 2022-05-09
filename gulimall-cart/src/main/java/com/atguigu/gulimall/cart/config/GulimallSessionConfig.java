@@ -14,11 +14,10 @@ public class GulimallSessionConfig {
     public CookieSerializer cookieSerializer() {
 
         DefaultCookieSerializer cookieSerializer = new DefaultCookieSerializer();
-
         //放大作用域
         cookieSerializer.setDomainName("gulimall.com");
         cookieSerializer.setCookieName("GULISESSIONID");
-
+        cookieSerializer.setCookieMaxAge(60 * 60 * 24 * 7);
         return cookieSerializer;
     }
 

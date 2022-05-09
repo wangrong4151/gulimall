@@ -1,6 +1,6 @@
-package com.atguigu.gulimall.member.config.interceptor;
+package com.atguigu.gulimall.member.interceptor;
 
-
+import com.atguigu.common.constant.AuthServerConstant;
 import com.atguigu.common.to.MemberResponseVo;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 
 import java.io.PrintWriter;
 
-import static com.atguigu.common.constant.AuthServerConstant.LOGIN_USER;
 
 /**
  * @Description: 登录拦截器
@@ -39,7 +38,7 @@ public class LoginUserInterceptor implements HandlerInterceptor {
         HttpSession session = request.getSession();
 
         //获取登录的用户信息
-        MemberResponseVo attribute = (MemberResponseVo) session.getAttribute(LOGIN_USER);
+        MemberResponseVo attribute = (MemberResponseVo) session.getAttribute(AuthServerConstant.LOGIN_USER);
 
         if (attribute != null) {
             //把登录后用户的信息放在ThreadLocal里面进行保存
