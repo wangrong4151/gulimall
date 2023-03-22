@@ -6,21 +6,18 @@ import com.atguigu.common.utils.R;
 import com.atguigu.gulimall.product.entity.CategoryBrandRelationEntity;
 import com.atguigu.gulimall.product.service.CategoryBrandRelationService;
 import com.atguigu.gulimall.product.vo.Catelog2Vo;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.bouncycastle.jcajce.provider.asymmetric.ec.KeyFactorySpi;
-import org.redisson.Redisson;
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -35,7 +32,7 @@ import com.atguigu.gulimall.product.entity.CategoryEntity;
 import com.atguigu.gulimall.product.service.CategoryService;
 import org.springframework.transaction.annotation.Transactional;
 
-
+@Slf4j
 @Service("categoryService")
 public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity> implements CategoryService {
 
@@ -45,6 +42,9 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
     private StringRedisTemplate stringRedisTemplate;
     @Autowired
     private RedissonClient redisson;
+
+    @Autowired
+    private CategoryService categoryService;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -68,6 +68,24 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         }
 
         return menu;
+    }
+
+    public static void main(String[] args) {
+
+        List<CategoryEntity> list1 = new ArrayList<>();
+        List<CategoryEntity> list2 = new ArrayList<>();
+        for (CategoryEntity categoryEntity : list1) {
+            List<CategoryEntity> list3 = new ArrayList<>();
+            for (CategoryEntity entity : list2) {
+                if (categoryEntity.getParentCid().equals(entity.getParentCid())){
+                    list3.add(entity);
+                }
+
+            }
+            categoryEntity.setChildren(list3);
+        }
+
+
     }
 
     private List<CategoryEntity> getCategory(CategoryEntity root, List<CategoryEntity> all) {
@@ -167,6 +185,18 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
     @Override
     public List<CategoryEntity> getLevel1Categorys() {
         return baseMapper.selectList(new QueryWrapper<CategoryEntity>().eq("parent_cid", 0));
+    }
+
+    @Override
+    public IPage<CategoryEntity> lista(Integer currentPage,Integer pageSize) {
+        List<CategoryEntity> list1 = baseMapper.selectCategoryList();
+        LambdaQueryWrapper<CategoryEntity> wrapper = new LambdaQueryWrapper<>();
+        wrapper.orderByAsc(CategoryEntity::getName).eq(CategoryEntity::getCatLevel,1);
+        List<CategoryEntity> categoryEntities = baseMapper.selectList(wrapper);
+        List<Object> objectList = baseMapper.selectObjs(new QueryWrapper<CategoryEntity>().select("name"));
+        List<String> collect = objectList.stream().map(o -> (String) o).collect(Collectors.toList());
+        
+        return null;
     }
 
     private Map<String, List<Catelog2Vo>> getDataBd() {

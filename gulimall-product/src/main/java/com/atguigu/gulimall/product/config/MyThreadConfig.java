@@ -16,9 +16,9 @@ public class MyThreadConfig {
     @Bean
     public ThreadPoolExecutor threadPoolExecutor(ThreadPoolConfigProperties pool) {
         return new ThreadPoolExecutor(
-                pool.getCoreSize(),
-                pool.getMaxSize(),
-                pool.getKeepAliveTime(),
+                3,
+               5,
+                10,
                 TimeUnit.SECONDS,
                 new LinkedBlockingDeque<>(10000),
                 Executors.defaultThreadFactory(),

@@ -13,7 +13,7 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 @EnableRedisHttpSession     //开启springsession
 @EnableFeignClients(basePackages = "com.atguigu.gulimall.product.feign")
 @EnableDiscoveryClient
-@MapperScan("com.atguigu.gulimall.product.dao")
+@MapperScan({"com.atguigu.gulimall.product.dao","com.atguigu.gulimall.product.netty.mapper"})
 @SpringBootApplication//(exclude = {GlobalTransactionAutoConfiguration.class})
 public class GulimallProductApplication {
 

@@ -15,6 +15,9 @@
         <result property="productUnit" column="product_unit"/>
         <result property="productCount" column="product_count"/>
     </resultMap>
+    <select id="selectCategoryList" resultType="com.atguigu.gulimall.product.entity.CategoryEntity">
+        select a.* from pms_category a  where cat_id in (select max(cat_id) from pms_category where parent_cid!=0  group by parent_cid ) order by parent_cid
+    </select>
 
 
 </mapper>

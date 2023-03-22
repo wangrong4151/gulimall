@@ -5,5 +5,11 @@ spring:
   cloud:
     nacos:
       config:
-        server-addr: 127.0.0.1:8848
+        server-addr: 192.168.89.128:8848
         namespace: 4239bc4b-c58e-4a01-a2c8-51ce94a07b24
+
+plumelog:
+  appName: plumelog_gulimall-product
+  redisHost: 192.168.89.128:6379
+  redisAuth:
+  redisDb: 1

@@ -16,7 +16,6 @@ import java.util.Date;
 @TableName("undo_log")
 public class UndoLogEntity implements Serializable {
     private static final long serialVersionUID = 1L;
-
     /**
      *
      */

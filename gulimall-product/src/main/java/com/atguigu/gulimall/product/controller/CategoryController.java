@@ -6,6 +6,8 @@ import java.util.Map;
 
 
 import com.atguigu.common.log.annotation.SysLog;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -98,6 +100,17 @@ public class CategoryController {
         categoryService.removeByIds(Arrays.asList(catIds));
 
         return R.ok();
+    }
+
+    /**
+     * 列表
+     */
+    @RequestMapping("/lista")
+    //@RequiresPermissions("product:category:list")
+    public R lista(Integer currentPage,Integer pageSize) {
+        IPage<CategoryEntity> list = categoryService.lista(currentPage,pageSize);
+
+        return R.ok().put("list", list);
     }
 
 }
