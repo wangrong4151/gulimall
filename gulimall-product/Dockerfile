@@ -1,11 +1,13 @@
 FROM java:8
 
-VOLUME /tmp
+ARG JAR_FILE
+COPY ${JAR_FILE} gulimall-product.jar
 
-COPY gulimall-product.jar gulimall-product.jar
-
-RUN bash -c "touch /gulimall-product.jar"
-
-EXPOSE 7070
-
-ENTRYPOINT ["java", "-jar", "gulimall-product.jar", "--server.port=10000", "> /log/gulimall-product.log"]
+EXPOSE 10000
+#设置编码格式
+ENV LANG="zh_CN.UTF-8"
+ENV LANGUAGE="zh_CN:zh"
+#设置时区为中国
+ENV TZ=Asia/Shanghai
+ENV DEBIAN_FRONTEND noninteractive
+ENTRYPOINT ["java", "-jar", "gulimall-product.jar", "--server.port=10000"]
