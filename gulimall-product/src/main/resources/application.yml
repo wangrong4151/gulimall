@@ -30,7 +30,8 @@ spring:
     port: 6379
 mybatis-plus:
   mapper-locations: classpath:/mapper/**/*.xml
-
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   #设置实体类的自增主键
   global-config:
     db-config:
