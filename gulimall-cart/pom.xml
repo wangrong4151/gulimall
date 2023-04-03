@@ -11,7 +11,7 @@
     <groupId>com.atguigu.gulimall</groupId>
     <artifactId>gulimall-cart</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>gulimall-car</name>
+    <name>gulimall-cart</name>
     <description>购物车</description>
 
     <properties>
